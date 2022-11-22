@@ -16,7 +16,7 @@ public:
 	{
 		ImGui::Begin("Settings");
 		ImGui::Text("Last render: %.3fms", m_LastRenderTime);
-		ImGui::Text("Resolution : %1fms", ImGui::GetContentRegionAvail().x * ImGui::GetContentRegionAvail().y);
+		ImGui::Text("Resolution : %.1fms", ImGui::GetContentRegionAvail().x );
 		if (ImGui::Button("Render")) {
 			Render();
 		};
@@ -31,7 +31,8 @@ public:
 
 		auto image = m_renderer.GetFinalImage();
 		if(image){
-			ImGui::Image(image->GetDescriptorSet(), {(float)image->GetWidth(), (float)image->GetHeight() });
+			ImGui::Image(image->GetDescriptorSet(), { (float)image->GetWidth(), (float)image->GetHeight() }, 
+				ImVec2(0,1), ImVec2(1,0));
 		}
 		ImGui::End();
 		ImGui::PopStyleVar();
